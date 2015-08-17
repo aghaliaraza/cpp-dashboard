@@ -7,9 +7,7 @@ namespace CppDashboard.DataProvider
 {
     public abstract class DataCanRefreshBase<T> : ICanRefresh<T>
     {
-        public abstract void Load();
-
-        public void Refresh(ref IList<T> source)
+        public void Refresh(ref IEnumerable<T> source)
         {
             var result = LoadingFrom();
 

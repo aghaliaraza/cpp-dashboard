@@ -206,6 +206,8 @@
     <Compile Include="Initialisers\IInitialiser.cs" />
     <Compile Include="Initialisers\SystemDataInitialiser.cs" />
     <Compile Include="DataProvider\SystemEventSummaryWindow.cs" />
+    <Compile Include="Logic\General\ChanelDataAdjustment.cs" />
+    <Compile Include="Logic\General\Channel.cs" />
     <Compile Include="Logic\Offline\SystemOnlineOrOfflineStatus.cs" />
     <Compile Include="Logic\Orphans\CancellationsDueToOrphan.cs" />
     <Compile Include="Logic\Payments\PaymentsCalculator.cs" />

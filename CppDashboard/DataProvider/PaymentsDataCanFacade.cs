@@ -25,7 +25,7 @@ namespace CppDashboard.DataProvider
             _connectionCreator = new ConnectionCreator(Scope.CustomerPayment);
         }
 
-        public override void Load()
+        public void Load()
         {
             var sql = string.Format("SELECT  * FROM Payment WITH (NOLOCK) " +
                       "WHERE CreationDateTime BETWEEN '{0}' AND '{1}' " +
@@ -53,8 +53,7 @@ namespace CppDashboard.DataProvider
 
         public void Reload()
         {
-            IList<Payment> pays = _payments.ToList();
-            Refresh(ref pays);
+            Refresh(ref _payments);
         }
     }
 }

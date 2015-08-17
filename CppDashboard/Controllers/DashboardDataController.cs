@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using CppDashboard.DataProvider;
 using CppDashboard.Initialisers;
-using CppDashboard.Logic;
 using CppDashboard.Models;
 using WebGrease.Css.Extensions;
 

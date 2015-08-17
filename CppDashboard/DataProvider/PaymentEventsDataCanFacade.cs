@@ -26,7 +26,7 @@ namespace CppDashboard.DataProvider
             _connectionCreator = new ConnectionCreator(Scope.Monitoring);
         }
 
-        public override void Load()
+        public void Load()
         {
             var sql = string.Format("SELECT  * FROM PaymentEvents WITH (NOLOCK) " +
                       "WHERE EventDateTime BETWEEN '{0}' AND '{1}' " +
@@ -55,8 +55,7 @@ namespace CppDashboard.DataProvider
 
         public void Reload()
         {
-            IList<PaymentEvent> events = _paymentEvents.ToList();
-            Refresh(ref events);
+            Refresh(ref _paymentEvents);
         }
     }
 }

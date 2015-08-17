@@ -42,7 +42,7 @@ namespace CppDashboard.Models
                 DeclinedPayments = _paymentsCalculator.GetTotalDeclinedPayments(),
                 GatewayMkFaliures = refusals.ServiceLevelRefusals,
                 AdyenMkFaliures = refusals.AdyenRefusals,
-                Logs = _loggingInfo.Logs.Take(100).OrderByDescending(d => d.Date),
+                Logs = _loggingInfo.Logs.OrderByDescending(d => d.Date).Take(100),
                 Current = DateTime.Now,
             };
 

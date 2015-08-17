@@ -32,7 +32,7 @@ namespace CppDashboard.DataProvider
             _configs = _customerPaymentsConnection.Exec<OfflineConfig>(sql);
         }
 
-        public void Refresh(ref IList<OfflineConfig> source)
+        public void Refresh(ref IEnumerable<OfflineConfig> source)
         {
             var sql = string.Format("SELECT  * FROM Configuration WITH (NOLOCK) " +
                   "WHERE [Key] = '{0}' OR [Key]= '{1}'", "Offline:Status", "Offline:ManualOverrideEnabled");
@@ -48,8 +48,7 @@ namespace CppDashboard.DataProvider
 
         public void Reload()
         {
-            IList<OfflineConfig> configs = _configs.ToList();
-            Refresh(ref configs);
+            Refresh(ref _configs);
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using CppDashboard.DataProvider.Setup;
 using CppDashboard.Models;
 using CppDashboard.Extensions;
-using Ninject.Infrastructure.Language;
 
 namespace CppDashboard.DataProvider
 {
@@ -27,7 +26,7 @@ namespace CppDashboard.DataProvider
             _connectionCreator = new ConnectionCreator(Scope.Logging);
         }
 
-        public override void Load()
+        public void Load()
         {
             var sql = string.Format("SELECT  * FROM logging.CustomerPayments_log WITH (NOLOCK) " +
                    "WHERE Date BETWEEN '{0}' AND '{1}' " +
@@ -55,8 +54,7 @@ namespace CppDashboard.DataProvider
 
         public void Reload()
         {
-            IList<Log> l = _logs.ToList();
-            Refresh(ref l);
+            Refresh(ref _logs);
         }
     }
 }

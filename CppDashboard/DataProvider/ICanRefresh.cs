@@ -4,7 +4,7 @@ namespace CppDashboard.DataProvider
 {
     public interface ICanRefresh<T>
     {
-        void Refresh(ref IList<T> source);
+        void Refresh(ref IEnumerable<T> source);
     }
 
     public interface ICanReload
