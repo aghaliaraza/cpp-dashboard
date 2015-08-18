@@ -12,7 +12,7 @@
     <script type="text/javascript">
     window.loadUrl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "DashboardData", action = "Get" })";
     window.loadSystemUri = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SystemData", action = "GetSystemErrors" })";
-        window.loadEventsUri = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SystemData", action = "GetSysteEvents" })";
+        window.loadEventsUri = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SystemData", action = "GetSystemEventsEx" })";
         window.updateUrl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "DashboardData", action = "Update" })";
     </script>
 
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span style="font-weight: bold">System</span>|<span style="font-style: italic;">events</span></h3>
@@ -74,14 +74,20 @@
                     <div class="panel-body" style="overflow:scroll; height:300px;">
                         <table class="table table-condensed">
                             <tr>
-                                <th>Event Type</th>
-                                <th>Channel</th>
-                                <th>Occurrences</th>
+                                <th>Event Name</th>
+                                <th>Web</th>
+                                <th>B2B</th>
+                                <th>Mobile</th>
+                                <th>CallCentre</th>
+                                <th>Airport</th>
                             </tr>
                             <tr ng-repeat="x in systemEvents.eventSummary">
-                                <td>{{ x.EventType }}</td>
-                                <td>{{ x.Channel }}</td>
-                                <td nowrap="nowrap">{{ x.Occurrences }}</td>
+                                <td>{{ x.Key }}</td>
+                                <td>{{ displayForKey(x.Values, 'Web') }}</td>
+                                <td>{{ displayForKey(x.Values, 'B2B') }}</td>
+                                <td>{{ displayForKey(x.Values, 'Mobile') }}</td>
+                                <td>{{ displayForKey(x.Values, 'CallCentre') }}</td>
+                                <td>{{ displayForKey(x.Values, 'Airport') }}</td>
                             </tr>
                         </table>
                     </div>

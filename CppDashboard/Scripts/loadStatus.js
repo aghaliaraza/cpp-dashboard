@@ -23,6 +23,17 @@ angular.module("customerPaymentsDashboard", [])
                 });
             };
 
+            $scope.displayForKey = function(instance, channel) {
+                var valueToShow = 0;
+                for (var entry in instance) {
+                    if (instance[entry].Channel == channel) {
+                        valueToShow = instance[entry].Occurrences;
+                    }
+                }
+
+                return valueToShow;
+            };
+
             var doPageFunc = function () {
                 var offlineStatus = $http.get(window.loadUrl);
 
@@ -40,9 +51,9 @@ angular.module("customerPaymentsDashboard", [])
                     $scope.paymentInfo.mkGatewayFailures = data.GatewayMkFaliures;
                     $scope.paymentInfo.mkAdyenFailures = data.AdyenMkFaliures;
                 });
-
-
             };
+            
+
             doPageFunc();
             systemLoad();
             systemEvents();

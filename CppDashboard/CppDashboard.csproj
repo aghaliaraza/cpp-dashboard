@@ -216,6 +216,7 @@
     <Compile Include="Logic\Refusals\IGatewayRefusals.cs" />
     <Compile Include="Logic\Refusals\RefuseSummary.cs" />
     <Compile Include="Logic\ThroughputCalculator.cs" />
+    <Compile Include="Models\EventGroup.cs" />
     <Compile Include="Models\OfflineConfig.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\ErrorSummary.cs" />

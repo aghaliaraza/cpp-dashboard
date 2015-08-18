@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using CppDashboard.DataProvider;
 using CppDashboard.Initialisers;
@@ -38,6 +39,18 @@ namespace CppDashboard.Controllers
             _chanelDataAdjustment.CorrectChannelData(_eventSummaryWindow.EventSummary);
 
             return _eventSummaryWindow.EventSummary;
+        }
+
+        [HttpGet]
+        public IEnumerable<EventGroup> GetSystemEventsEx()
+        {
+            _chanelDataAdjustment.CorrectChannelData(_eventSummaryWindow.EventSummary);
+
+            var result = _eventSummaryWindow.EventSummary
+                .GroupBy(evt => evt.EventType)
+                .Select(e => new EventGroup { Key = e.Key, Values = e }).ToList();
+
+            return result;
         }
     }
 }
