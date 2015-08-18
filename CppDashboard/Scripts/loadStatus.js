@@ -1,6 +1,7 @@
 angular.module("customerPaymentsDashboard", [])
         .controller("statusController", function ($scope, $http, $interval) {
 
+
             var systemLoad = function () {
                 var system = $http.get(window.loadSystemUri);
                 system.success(function (data) {
@@ -58,9 +59,35 @@ angular.module("customerPaymentsDashboard", [])
 
                     var paymentSummary = data.SuccessPayments / (data.SuccessPayments + data.DeclinedPayments) * 100;
 
+                    var totalPayments = data.SuccessPayments + data.GatewayMkFaliures + data.CancellationsDueToGhosts;
+
+                    var cancelations = data.CancellationsDueToGhosts / data.SuccessPayments * 100;
+
+                    var refused = data.GatewayMkFaliures / totalPayments * 100;
+
+                    var commsFailure = data.CommsFaliures / totalPayments * 100;
+
                     radialProgress(document.getElementById('paymentInfo')).diameter(150).value(paymentSummary).render();
+                    radialProgress(document.getElementById('cancellations')).onClick(function () { onClick1(cancelations); }).diameter(150).value(cancelations).render();
+                    radialProgress(document.getElementById('refused')).diameter(150).value(refused).render();
+                    radialProgress(document.getElementById('failures')).diameter(150).value(commsFailure).render();
+
                 });
             };
+
+            function onClick1(value) {
+                vex.open({ content: '<div style="width:400px; height:300px; overflow:scroll;">' + value + '</div>' });
+            }
+
+            function onClick2() {
+                deselect();
+                div2.attr("class", "selectedRadial");
+            }
+
+            function onClick3() {
+                deselect();
+                div3.attr("class", "selectedRadial");
+            }
             
 
             doPageFunc();

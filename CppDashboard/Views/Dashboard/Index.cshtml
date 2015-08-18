@@ -50,6 +50,58 @@
                 <label style="float: right" class="label label-default">{{current | date: "mediumTime"}}</label>
             </h3>
         </p>
+        <div class="alert alert-info" role="alert">
+            <p><strong>System Status | </strong><span style="font-style: italic">Last 2 hours - refresh every 10 seconds</span></p>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span style="font-weight: bold">Payments</span>|<span style="font-style: italic;">declines</span></h3>
+                    </div>
+                    <div class="panel-body" id="paymentInfo">
+                        <h4><label class="label label-success">{{paymentInfo.success}}</label>|<label class="label label-warning">{{paymentInfo.declines}}</label></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span style="font-weight: bold">Cancelled</span><span style="font-style: italic;">(orphan)</span></h3>
+                    </div>
+                    <div class="panel-body" id="cancellations">
+                        <h4><label class="label label-warning">{{paymentInfo.cancellations}}</label></h4>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span style="font-weight: bold">Refused</span><span style="font-style: italic;">(at gateway)</span></h3>
+                    </div>
+                    <div class="panel-body" id="refused">
+                        <h4>
+                            <span>
+                                MakePayment
+                                <label class="label label-warning">{{paymentInfo.mkGatewayFailures}}</label>
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span style="font-weight: bold">PspComms</span><span style="font-style: italic;">(faliure)</span></h3>
+                    </div>
+                    <div class="panel-body" id="failures">
+                        <h4><label class="label label-warning">{{paymentInfo.commsFaiures}}</label></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="alert alert-success" role="alert">
             <p><strong>System Status | </strong><span style="font-style: italic">Last 24 hours - refresh every minute</span></p>
         </div>
@@ -106,60 +158,6 @@
                 </div>
             </div>
         </div>
-        <div class="alert alert-info" role="alert">
-            <p><strong>System Status | </strong><span style="font-style: italic">Last 2 hours - refresh every 10 seconds</span></p>
-        </div>
-        <div class="row">
-
-            <div class="col-sm-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span style="font-weight: bold">Payments</span>|<span style="font-style: italic;">declines</span></h3>
-                    </div>
-                    <div class="panel-body" id="paymentInfo">
-                        <h4><label class="label label-success">{{paymentInfo.success}}</label>|<label class="label label-warning">{{paymentInfo.declines}}</label></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span style="font-weight: bold">Cancelled</span><span style="font-style: italic;">(orphan)</span></h3>
-                    </div>
-                    <div class="panel-body">
-                        <h4><label class="label label-warning">{{paymentInfo.cancellations}}</label></h4>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span style="font-weight: bold">Refused</span><span style="font-style: italic;">(at gateway)</span></h3>
-                    </div>
-                    <div class="panel-body">
-                        <h4>
-                            <span>
-                                MakePayment
-                                <label class="label label-warning">{{paymentInfo.mkGatewayFailures}}</label>
-                            </span>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span style="font-weight: bold">PspComms</span><span style="font-style: italic;">(faliure)</span></h3>
-                    </div>
-                    <div class="panel-body">
-                        <h4><label class="label label-warning">{{paymentInfo.commsFaiures}}</label></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <table class="table table-condensed">
             <tr ng-repeat="x in logs">
                 <td>{{ x.Id }}</td>
