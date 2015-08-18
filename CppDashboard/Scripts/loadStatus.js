@@ -55,6 +55,10 @@ angular.module("customerPaymentsDashboard", [])
                     $scope.paymentInfo.commsFaiures = data.CommsFaliures;
                     $scope.paymentInfo.mkGatewayFailures = data.GatewayMkFaliures;
                     $scope.paymentInfo.mkAdyenFailures = data.AdyenMkFaliures;
+
+                    var paymentSummary = data.SuccessPayments / (data.SuccessPayments + data.DeclinedPayments) * 100;
+
+                    radialProgress(document.getElementById('paymentInfo')).diameter(150).value(paymentSummary).render();
                 });
             };
             
