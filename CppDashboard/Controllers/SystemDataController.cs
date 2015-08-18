@@ -34,14 +34,6 @@ namespace CppDashboard.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SystemEventSummary> GetSysteEvents()
-        {
-            _chanelDataAdjustment.CorrectChannelData(_eventSummaryWindow.EventSummary);
-
-            return _eventSummaryWindow.EventSummary;
-        }
-
-        [HttpGet]
         public IEnumerable<EventGroup> GetSystemEventsEx()
         {
             _chanelDataAdjustment.CorrectChannelData(_eventSummaryWindow.EventSummary);

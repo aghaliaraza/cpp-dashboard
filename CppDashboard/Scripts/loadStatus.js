@@ -34,6 +34,11 @@ angular.module("customerPaymentsDashboard", [])
                 return valueToShow;
             };
 
+            $scope.showMessage = function(message) {
+
+                vex.open({ content: '<div style="width:400px; height:300px; overflow:scroll;">' + message + '</div>' });
+        };
+
             var doPageFunc = function () {
                 var offlineStatus = $http.get(window.loadUrl);
 
