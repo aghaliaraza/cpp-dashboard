@@ -3,13 +3,23 @@
 
 module cpp.dashboard {
 
-    export class TotalCancellationFinder {
+    export class SimpleModelBuilder {
 
-        public GetAllCancellations(monitoringEvents: Array<any>): number {
+        public Build(monitoringEvents: Array<any>): SummaryDataViewModel {
 
-            var items = _.filter(monitoringEvents,(entry) => entry.EventType == 'CancelPaymentSubmitted');
+            var cancelled = _.filter(monitoringEvents,(entry) => entry.EventType == 'CancelPaymentSubmitted');
+            var pspComms = _.filter(monitoringEvents, (entry) => entry.EventType == 'PSPCommunicationFailed');
 
-            return items.length;
+            var model = new SummaryDataViewModel();
+            model.submittedCancellations = cancelled.length;
+            model.pspCommunicationFaliures = pspComms.length;
+
+            return model;
         }
+    }
+
+    export class SummaryDataViewModel {
+        submittedCancellations: number;
+        pspCommunicationFaliures: number;
     }
 }

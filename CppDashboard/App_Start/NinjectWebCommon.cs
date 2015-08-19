@@ -81,7 +81,6 @@ namespace CppDashboard.App_Start
         {
             kernel.Bind<PageModelBuilder>().To<PageModelBuilder>();
             kernel.Bind<ICancellationsDueToOrphan>().To<CancellationsDueToOrphan>();
-            kernel.Bind<IPspCommunicationFailures>().To<PspCommunicationFailures>();
             kernel.Bind<IPaymentsCalculator>().To<PaymentsCalculator>();
             kernel.Bind<IGatewayRefusals>().To<GatewayRefusals>();
             kernel.Bind<SystemOnlineOrOfflineStatus>().ToSelf();

@@ -25,8 +25,6 @@ namespace CppDashboard.Models
 
         public int  CancellationsDueToGhosts { get; set; }
 
-        public int CommsFaliures { get; set; }
-
         public int GatewayMkFaliures { get; set; }
 
         public int AdyenMkFaliures { get; set; }

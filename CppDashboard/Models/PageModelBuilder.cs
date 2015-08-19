@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using CppDashboard.DataProvider;
-using CppDashboard.Logic.Cancellations;
-using CppDashboard.Logic.General;
 using CppDashboard.Logic.Offline;
 using CppDashboard.Logic.Orphans;
 using CppDashboard.Logic.Payments;
@@ -13,20 +11,17 @@ namespace CppDashboard.Models
     public class PageModelBuilder
     {
         private readonly ICancellationsDueToOrphan _cancellationsDueToOrphan;
-        private readonly IPspCommunicationFailures _communicationFailures;
         private readonly IPaymentsCalculator _paymentsCalculator;
         private readonly IGatewayRefusals _gatewayRefusals;
         private readonly ILoggingInfo _loggingInfo;
         private readonly SystemOnlineOrOfflineStatus _systemOnlineOrOfflineStatus;
         private readonly IMonitoringEvents _monitoringEvents;
 
-        public PageModelBuilder(ICancellationsDueToOrphan cancellationsDueToOrphan, 
-            IPspCommunicationFailures communicationFailures, IPaymentsCalculator paymentsCalculator, 
+        public PageModelBuilder(ICancellationsDueToOrphan cancellationsDueToOrphan, IPaymentsCalculator paymentsCalculator, 
             IGatewayRefusals gatewayRefusals, ILoggingInfo loggingInfo, 
             SystemOnlineOrOfflineStatus systemOnlineOrOfflineStatus, IMonitoringEvents monitoringEvents)
         {
             _cancellationsDueToOrphan = cancellationsDueToOrphan;
-            _communicationFailures = communicationFailures;
             _paymentsCalculator = paymentsCalculator;
             _gatewayRefusals = gatewayRefusals;
             _loggingInfo = loggingInfo;
@@ -41,7 +36,6 @@ namespace CppDashboard.Models
             {
                 IsSystemOnline = _systemOnlineOrOfflineStatus.IsSystemOnline(),
                 CancellationsDueToGhosts = _cancellationsDueToOrphan.GetTotal(),
-                CommsFaliures = _communicationFailures.GetTotal(),
                 SuccessPayments = _paymentsCalculator.GetTotalSuccessfulPayments(),
                 DeclinedPayments = _paymentsCalculator.GetTotalDeclinedPayments(),
                 GatewayMkFaliures = refusals.ServiceLevelRefusals,

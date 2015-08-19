@@ -12,7 +12,10 @@ namespace CppDashboard.DataProvider
         {
             get
             {
-                return _configs;
+                lock (((ICollection)_configs).SyncRoot)
+                {
+                    return _configs;
+                }
             }
         }
 

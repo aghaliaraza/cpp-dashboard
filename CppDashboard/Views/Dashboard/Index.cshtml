@@ -80,13 +80,13 @@
                         <h3 class="panel-title"><span style="font-weight: bold">Cancellations</span></h3>
                     </div>
                     <div class="panel-body">
-                        <h4><label class="label label-warning">{{paymentInfo.totalCancellations}}</label>|<label class="label label-warning">{{paymentInfo.cancellations}} (orphan)</label></h4>
+                        <h4><label class="label label-warning">{{paymentInfo.model.submittedCancellations}}</label>|<label class="label label-warning">{{paymentInfo.cancellations}} (orphan)</label></h4>
                         <div id="cancellationPie"></div>
                     </div>
                 </div>
 
             </div>
-            <div class="col-sm-3">
+            @*<div class="col-sm-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span style="font-weight: bold">Refused</span><span style="font-style: italic;">(at gateway)</span></h3>
@@ -100,17 +100,7 @@
                         </h4>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span style="font-weight: bold">PspComms</span><span style="font-style: italic;">(faliure)</span></h3>
-                    </div>
-                    <div class="panel-body" id="failures">
-                        <h4><label class="label label-warning">{{paymentInfo.commsFaiures}}</label></h4>
-                    </div>
-                </div>
-            </div>
+            </div>*@
         </div>
         <div class="alert alert-success" role="alert">
             <p><strong>System Status | </strong><span style="font-style: italic">Last 24 hours - refresh every minute</span></p>

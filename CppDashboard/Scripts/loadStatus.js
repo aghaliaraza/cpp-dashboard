@@ -53,49 +53,30 @@ angular.module("customerPaymentsDashboard", [])
                     $scope.paymentInfo.success = data.SuccessPayments;
                     $scope.paymentInfo.declines = data.DeclinedPayments;
                     $scope.paymentInfo.cancellations = data.CancellationsDueToGhosts;
-                    $scope.paymentInfo.commsFaiures = data.CommsFaliures;
                     $scope.paymentInfo.mkGatewayFailures = data.GatewayMkFaliures;
                     $scope.paymentInfo.mkAdyenFailures = data.AdyenMkFaliures;
 
                     var paymentSummary = data.SuccessPayments / (data.SuccessPayments + data.DeclinedPayments) * 100;
 
-                    var totalPayments = data.SuccessPayments + data.GatewayMkFaliures + data.CancellationsDueToGhosts;
+                    //var totalPayments = data.SuccessPayments + data.GatewayMkFaliures + data.CancellationsDueToGhosts;
 
-                    var cancelations = data.CancellationsDueToGhosts / data.SuccessPayments * 100;
+                    //var refused = data.GatewayMkFaliures / totalPayments * 100;
 
-                    var refused = data.GatewayMkFaliures / totalPayments * 100;
-
-                    var commsFailure = data.CommsFaliures / totalPayments * 100;
+                    //var commsFailure = data.CommsFaliures / totalPayments * 100;
 
                     radialProgress(document.getElementById('paymentInfo')).diameter(150).value(paymentSummary).render();
-                    radialProgress(document.getElementById('cancellations')).onClick(function () { onClick1(cancelations); }).diameter(150).value(cancelations).render();
-                    radialProgress(document.getElementById('refused')).diameter(150).value(refused).render();
-                    radialProgress(document.getElementById('failures')).diameter(150).value(commsFailure).render();
+                    //radialProgress(document.getElementById('refused')).diameter(150).value(refused).render();
+                    //radialProgress(document.getElementById('failures')).diameter(150).value(commsFailure).render();
                     
-                    var cancellation = new cpp.dashboard.TotalCancellationFinder();
-                    var totalCancellations = cancellation.GetAllCancellations(data.MonitoringEvents);
+                    var simpleModelBuilder = new cpp.dashboard.SimpleModelBuilder();
+                    var model = simpleModelBuilder.Build(data.MonitoringEvents);
 
-                    createCancellationPie(data.CancellationsDueToGhosts, totalCancellations);
+                    createCancellationPie(data.CancellationsDueToGhosts, model.submittedCancellations);
 
-                    $scope.paymentInfo.totalCancellations = totalCancellations;
+                    $scope.paymentInfo.model = model;
 
                 });
             };
-
-            function onClick1(value) {
-                vex.open({ content: '<div style="width:400px; height:300px; overflow:scroll;">' + value + '</div>' });
-            }
-
-            function onClick2() {
-                deselect();
-                div2.attr("class", "selectedRadial");
-            }
-
-            function onClick3() {
-                deselect();
-                div3.attr("class", "selectedRadial");
-            }
-            
 
             doPageFunc();
             systemLoad();

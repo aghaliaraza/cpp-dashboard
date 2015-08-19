@@ -214,7 +214,6 @@
     <Compile Include="Logic\Offline\SystemOnlineOrOfflineStatus.cs" />
     <Compile Include="Logic\Orphans\CancellationsDueToOrphan.cs" />
     <Compile Include="Logic\Payments\PaymentsCalculator.cs" />
-    <Compile Include="Logic\General\PspCommunicationFailures.cs" />
     <Compile Include="Logic\Refusals\GatewayRefusals.cs" />
     <Compile Include="Logic\Refusals\IGatewayRefusals.cs" />
     <Compile Include="Logic\Refusals\RefuseSummary.cs" />

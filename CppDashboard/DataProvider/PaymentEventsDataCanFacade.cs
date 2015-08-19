@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CppDashboard.DataProvider.Setup;
@@ -14,7 +15,10 @@ namespace CppDashboard.DataProvider
         {
             get
             {
-                return _paymentEvents;
+                lock (((ICollection)_paymentEvents).SyncRoot)
+                {
+                    return _paymentEvents;
+                }
             }
         }
 

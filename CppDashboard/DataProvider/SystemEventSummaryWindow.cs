@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using CppDashboard.DataProvider.Setup;
 using CppDashboard.Extensions;
 using CppDashboard.Models;
@@ -14,7 +14,10 @@ namespace CppDashboard.DataProvider
         {
             get
             {
-                return _summary;
+                lock (((ICollection)_summary).SyncRoot)
+                {
+                    return _summary;
+                }
             }
         }
 
