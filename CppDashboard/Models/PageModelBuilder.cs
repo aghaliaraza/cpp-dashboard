@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CppDashboard.DataProvider;
+using CppDashboard.Logic.Cancellations;
 using CppDashboard.Logic.General;
 using CppDashboard.Logic.Offline;
 using CppDashboard.Logic.Orphans;
@@ -17,10 +18,12 @@ namespace CppDashboard.Models
         private readonly IGatewayRefusals _gatewayRefusals;
         private readonly ILoggingInfo _loggingInfo;
         private readonly SystemOnlineOrOfflineStatus _systemOnlineOrOfflineStatus;
+        private readonly IMonitoringEvents _monitoringEvents;
 
         public PageModelBuilder(ICancellationsDueToOrphan cancellationsDueToOrphan, 
             IPspCommunicationFailures communicationFailures, IPaymentsCalculator paymentsCalculator, 
-            IGatewayRefusals gatewayRefusals, ILoggingInfo loggingInfo, SystemOnlineOrOfflineStatus systemOnlineOrOfflineStatus)
+            IGatewayRefusals gatewayRefusals, ILoggingInfo loggingInfo, 
+            SystemOnlineOrOfflineStatus systemOnlineOrOfflineStatus, IMonitoringEvents monitoringEvents)
         {
             _cancellationsDueToOrphan = cancellationsDueToOrphan;
             _communicationFailures = communicationFailures;
@@ -28,6 +31,7 @@ namespace CppDashboard.Models
             _gatewayRefusals = gatewayRefusals;
             _loggingInfo = loggingInfo;
             _systemOnlineOrOfflineStatus = systemOnlineOrOfflineStatus;
+            _monitoringEvents = monitoringEvents;
         }
 
         public PageModel Build()
@@ -44,6 +48,7 @@ namespace CppDashboard.Models
                 AdyenMkFaliures = refusals.AdyenRefusals,
                 Logs = _loggingInfo.Logs.OrderByDescending(d => d.Date).Take(100),
                 Current = DateTime.Now,
+                MonitoringEvents = _monitoringEvents.PaymentEvents
             };
 
             return pageModel;

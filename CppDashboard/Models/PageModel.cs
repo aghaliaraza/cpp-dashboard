@@ -30,5 +30,7 @@ namespace CppDashboard.Models
         public int GatewayMkFaliures { get; set; }
 
         public int AdyenMkFaliures { get; set; }
+
+        public IEnumerable<PaymentEvent> MonitoringEvents { get; set; }
     }
 }

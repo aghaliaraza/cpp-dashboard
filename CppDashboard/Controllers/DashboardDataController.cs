@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using CppDashboard.DataProvider;
 using CppDashboard.Initialisers;
 using CppDashboard.Models;
@@ -27,6 +28,14 @@ namespace CppDashboard.Controllers
             var model = _pageModelBuilder.Build();
             
             return model;
+        }
+
+        [HttpGet]
+        public IEnumerable<PaymentEvent> GetMonitoringEvents()
+        {
+            var model = _pageModelBuilder.Build();
+
+            return model.MonitoringEvents;
         }
 
         [HttpGet]

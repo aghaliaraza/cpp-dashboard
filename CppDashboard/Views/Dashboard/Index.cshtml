@@ -12,18 +12,27 @@
     <script type="text/javascript">
     window.loadUrl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "DashboardData", action = "Get" })";
     window.loadSystemUri = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SystemData", action = "GetSystemErrors" })";
-        window.loadEventsUri = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SystemData", action = "GetSystemEventsEx" })";
-        window.updateUrl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "DashboardData", action = "Update" })";
+    window.loadEventsUri = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SystemData", action = "GetSystemEventsEx" })";
+    window.updateUrl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "DashboardData", action = "Update" })";
+    window.monitoringEventsUrl = "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "DashboardData", action = "GetMonitoringEvents" })";
     </script>
-
+    
+    <!-- Lo dash -->
+    <script src="~/Scripts/lodash.min.js"></script>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     
     <script src="~/Scripts/d3.min.js"></script>
+    <script src="~/Scripts/d3pie.js"></script>
     <script src="~/Scripts/radialProgress.js"></script>
+    <script src="~/Scripts/CancellationPie.js"></script>
     <script src="~/Scripts/loadStatus.js"></script>
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/vex.combined.min.js"></script>
+    
+   
+    <!--TS-->
+    <script src="~/Scripts/ts/Cancellations.js"></script>
     
     <script>vex.defaultOptions.className = 'vex-theme-default';</script>
     <link href="~/Content/vex.css" rel="stylesheet" />
@@ -42,7 +51,7 @@
     <title>Customer Payments::Dashboard</title>
 </head>
 <body>
-
+    <div id="totalCancellations"></div>
     <div ng-controller="statusController" class="container">
         <p>
             <h3>
@@ -65,13 +74,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span style="font-weight: bold">Cancelled</span><span style="font-style: italic;">(orphan)</span></h3>
+                        <h3 class="panel-title"><span style="font-weight: bold">Cancellations</span></h3>
                     </div>
-                    <div class="panel-body" id="cancellations">
-                        <h4><label class="label label-warning">{{paymentInfo.cancellations}}</label></h4>
+                    <div class="panel-body">
+                        <h4><label class="label label-warning">{{paymentInfo.totalCancellations}}</label>|<label class="label label-warning">{{paymentInfo.cancellations}} (orphan)</label></h4>
+                        <div id="cancellationPie"></div>
                     </div>
                 </div>
 

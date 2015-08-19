@@ -71,6 +71,13 @@ angular.module("customerPaymentsDashboard", [])
                     radialProgress(document.getElementById('cancellations')).onClick(function () { onClick1(cancelations); }).diameter(150).value(cancelations).render();
                     radialProgress(document.getElementById('refused')).diameter(150).value(refused).render();
                     radialProgress(document.getElementById('failures')).diameter(150).value(commsFailure).render();
+                    
+                    var cancellation = new cpp.dashboard.TotalCancellationFinder();
+                    var totalCancellations = cancellation.GetAllCancellations(data.MonitoringEvents);
+
+                    createCancellationPie(data.CancellationsDueToGhosts, totalCancellations);
+
+                    $scope.paymentInfo.totalCancellations = totalCancellations;
 
                 });
             };

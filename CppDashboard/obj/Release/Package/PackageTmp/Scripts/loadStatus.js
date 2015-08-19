@@ -34,6 +34,11 @@ angular.module("customerPaymentsDashboard", [])
                 return valueToShow;
             };
 
+            $scope.showMessage = function(message) {
+
+                vex.open({ content: '<div style="width:400px; height:300px; overflow:scroll;">' + message + '</div>' });
+        };
+
             var doPageFunc = function () {
                 var offlineStatus = $http.get(window.loadUrl);
 
@@ -50,6 +55,10 @@ angular.module("customerPaymentsDashboard", [])
                     $scope.paymentInfo.commsFaiures = data.CommsFaliures;
                     $scope.paymentInfo.mkGatewayFailures = data.GatewayMkFaliures;
                     $scope.paymentInfo.mkAdyenFailures = data.AdyenMkFaliures;
+
+                    var paymentSummary = data.SuccessPayments / (data.SuccessPayments + data.DeclinedPayments) * 100;
+
+                    radialProgress(document.getElementById('paymentInfo')).diameter(150).value(paymentSummary).render();
                 });
             };
             
